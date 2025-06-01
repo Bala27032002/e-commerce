@@ -1,6 +1,4 @@
 import React from 'react'
-import LabelCarousel from '../Component/LabelCarousel'
-import Header from '../Component/Header'
 import MenShirtSection from '../Component/MenShirtSection'
 
 function Home() {
