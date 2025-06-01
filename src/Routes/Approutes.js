@@ -7,6 +7,7 @@ function Approutes() {
 
     const routes =[
         { path:"/" , element:<Home />},
+        { path:"/shirt/:id" , element:<ShirtDetails />},
         { path:"/shirt/:id" , element:<ShirtDetails />}
 
 ]
