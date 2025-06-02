@@ -10,34 +10,35 @@ import shirt1 from '../Assets/Images/Shirt_1.webp';
 import shirt2 from '../Assets/Images/shirt-2.webp';
 import shirt3 from '../Assets/Images/shirt-3.webp';
 import shirt4 from '../Assets/Images/shirt-4.webp';
+import ShirtDetails from './ShirtDetails'
 
 const shirts = [
   {
     id: 1,
     name: "Kipling Shirt - Khaki",
     fabric: "LINEN",
-    price: 5000,
+    price: 1,
     img: shirt1,
   },
   {
     id: 2,
     name: "Mistari Shirt - Light Blue & White Print",
     fabric: "COTTON BLEND",
-    price: 4000,
+    price: 2,
     img: shirt2,
   },
   {
     id: 3,
     name: "Half Sleeves Shirt - Blue & Red Stripes",
     fabric: "LINEN BLEND",
-    price: 4500,
+    price: 1,
     img: shirt3,
   },
   {
     id: 4,
     name: "Mistari Shirt - Beige & Black Print",
     fabric: "LINEN BLEND",
-    price: 4500,
+    price: 2,
     img: shirt4,
   }
 ];
@@ -97,7 +98,8 @@ const MenShirtSection = () => {
             sx={{ display: 'flex', justifyContent: 'center' }}
           >
             <Box
-             onClick={() => navigate(`/shirt/${shirt.id}`)}
+             onClick={() => navigate(`/shirt/${shirt.id}`, { state: { shirt } })}
+
               display="flex"
               flexDirection="column"
               border="1px solid #eee"
@@ -162,7 +164,9 @@ const MenShirtSection = () => {
           </Grid>
         ))}
       </Grid>
+      <ShirtDetails shirts={shirts}/>
     </Box>
+
   );
 };
 

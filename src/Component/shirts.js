@@ -1,23 +1,10 @@
-import React from 'react';
-import {  useLocation } from 'react-router-dom';
-import { Box, Typography, Button } from '@mui/material';
-
-const loadRazorpay = (src) => {
-  return new Promise((resolve) => {
-    const script = document.createElement("script");
-    script.src = src;
-    script.onload = () => resolve(true);
-    script.onerror = () => resolve(false);
-    document.body.appendChild(script);
-  });
-};
-
 const ShirtDetailPage = () => {
+  const { id } = useParams();
   const location = useLocation();
   const shirt = location.state?.shirt;
 
   if (!shirt) {
-    return <Typography variant="h6"></Typography>;
+    return <Typography variant="h6">Shirt not found</Typography>;
   }
 
   const handlePayment = async () => {
@@ -28,9 +15,8 @@ const ShirtDetailPage = () => {
     }
 
     const options = {
-      key: "rzp_live_MoRSzBNKgPxVWd", 
-      key_secret:"mOHLvCW39ElnFVz5mntnJsVs",
-      amount: shirt.price * 100, // Razorpay takes amount in paise
+      key: "rzp_live_MoRSzBNKgPxVWd",
+      amount: shirt.price * 100,
       currency: "INR",
       name: "My Shirt Store",
       description: shirt.name,
@@ -64,5 +50,3 @@ const ShirtDetailPage = () => {
     </Box>
   );
 };
-
-export default ShirtDetailPage;

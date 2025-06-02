@@ -10,7 +10,7 @@ function Approutes() {
         { path:"/shirt/:id" , element:<ShirtDetails />}
 
 ]
-  return (
+  return (    
     <>
   
         
