@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Box, Grid, Typography, Select, MenuItem, Button, IconButton, useMediaQuery
 } from '@mui/material';
@@ -48,12 +48,12 @@ const shirts = [
 ];
 
 const MenShirtSection = () => {
-    const navigate = useNavigate();
-const { wishlist, toggleWishlist } = useContext(WishlistContext);
+  const navigate = useNavigate();
+  const { wishlist, toggleWishlist } = useContext(WishlistContext);
 
-  const [ setView] = useState(4); // 2 or 4 column layout
+  const [setView] = useState(4); // 2 or 4 column layout
   const [sortOrder, setSortOrder] = useState("featured");
-   const sizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
+  const sizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
   const [selectedSize, setSelectedSize] = useState(null);
 
   const theme = useTheme();
@@ -102,13 +102,13 @@ const { wishlist, toggleWishlist } = useContext(WishlistContext);
             sx={{ display: 'flex', justifyContent: 'center' }}
           >
             <Box
-             onClick={() => navigate(`/shirt/${shirt.id}`, { state: { shirt } })}
-// இந்த data-ஐ next page-க்கு props-வாக அனுப்பாமல் state-ஆக அனுப்புகிறீர்கள்.
+              onClick={() => navigate(`/shirt/${shirt.id}`, { state: { shirt } })}
+              // இந்த data-ஐ next page-க்கு props-வாக அனுப்பாமல் state-ஆக அனுப்புகிறீர்கள்.
 
-// வழி	விளக்கம்
-// ✅ state	Shirt object-ஐ next page-க்கு pass பண்ண fast & simple method. No backend call needed.
-// ❌ props	Page reload ஆகும்போது data இல்லை.
-// ❌ URL Params only	/shirt/1 மாதிரி id மட்டுமே pass செய்ய முடியும். Full object-ஐ pass செய்ய முடியாது.
+              // வழி	விளக்கம்
+              // ✅ state	Shirt object-ஐ next page-க்கு pass பண்ண fast & simple method. No backend call needed.
+              // ❌ props	Page reload ஆகும்போது data இல்லை.
+              // ❌ URL Params only	/shirt/1 மாதிரி id மட்டுமே pass செய்ய முடியும். Full object-ஐ pass செய்ய முடியாது.
               display="flex"
               flexDirection="column"
               border="1px solid #eee"
@@ -120,7 +120,7 @@ const { wishlist, toggleWishlist } = useContext(WishlistContext);
                 boxSizing: 'border-box',
                 backgroundColor: '#fff',
                 boxShadow: '0 2px 8px rgb(0 0 0 / 0.1)',
-                 cursor: 'pointer'
+                cursor: 'pointer'
               }}
             >
               <Box sx={{ height: 240, width: '100%' }}>
@@ -165,45 +165,45 @@ const { wishlist, toggleWishlist } = useContext(WishlistContext);
                   >
                     {shirt.name}
                   </Typography>
-                  <br/>
+                  <br />
                 </Box>
-<Box sx={{display:'flex',justifyContent:"space-between"}}>
-                <Typography >₹ {shirt.price.toLocaleString()}</Typography>
-              <IconButton onClick={(e) => {
-  e.stopPropagation(); // prevent card click
-  toggleWishlist(shirt);
-}}>
-  {wishlist.find((item) => item.id === shirt.id) ? (
-    <FavoriteIcon color="error" />
-  ) : (
-    <FavoriteBorderIcon />
-  )}
-</IconButton>
+                <Box sx={{ display: 'flex', justifyContent: "space-between" }}>
+                  <Typography >₹ {shirt.price.toLocaleString()}</Typography>
+                  <IconButton onClick={(e) => {
+                    e.stopPropagation(); // prevent card click
+                    toggleWishlist(shirt);
+                  }}>
+                    {wishlist.find((item) => item.id === shirt.id) ? (
+                      <FavoriteIcon color="error" />
+                    ) : (
+                      <FavoriteBorderIcon />
+                    )}
+                  </IconButton>
                 </Box>
                 <Box display="flex" gap={1} mt={2}>
-      {sizes.map((size) => (
-        <Button
-          key={size}
-          variant={selectedSize === size ? 'contained' : 'outlined'}
-          onClick={() => setSelectedSize(size)}
-          sx={{
-            minWidth: 5,
-            padding: '1px 6px',
-            fontSize: '10px',
-            borderRadius: '1px',
-          }}
-        >
-          {size}
-        </Button>
-      ))}
-    </Box>
+                  {sizes.map((size) => (
+                    <Button
+                      key={size}
+                      variant={selectedSize === size ? 'contained' : 'outlined'}
+                      onClick={() => setSelectedSize(size)}
+                      sx={{
+                        minWidth: 5,
+                        padding: '1px 6px',
+                        fontSize: '10px',
+                        borderRadius: '1px',
+                      }}
+                    >
+                      {size}
+                    </Button>
+                  ))}
+                </Box>
 
               </Box>
             </Box>
           </Grid>
         ))}
       </Grid>
-      <ShirtDetails shirts={shirts}/>
+      <ShirtDetails shirts={shirts} />
     </Box>
 
   );

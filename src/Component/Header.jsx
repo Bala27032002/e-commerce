@@ -16,14 +16,20 @@ import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import SignInModal from './SignInModal';
 import CustomBreadcrumbs from '../constant/CustomBreadcrumbs';
 import { WishlistContext } from '../context/WishlistContext';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState('HOME'); 
   const [popupOpen , setpopupOpen] = useState(false)
-
+  const [wishlistDrawerOpen, setWishlistDrawerOpen] = useState(false); 
+const navigate = useNavigate();
 
   const { wishlist } = useContext(WishlistContext);
+
+    const handleWishlistToggle = () => {
+    setWishlistDrawerOpen(!wishlistDrawerOpen);
+  };
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
@@ -92,7 +98,7 @@ setpopupOpen(true);
           <IconButton>
             <PersonOutlineIcon />
           </IconButton>
-         <IconButton>
+         <IconButton onClick={handleWishlistToggle}>
   <WorkOutlineIcon />
   {wishlist.length > 0 && (
     <Box
@@ -166,6 +172,55 @@ setpopupOpen(true);
                 </ListItem>
               ))}
           </List>
+        </Box>
+      </Drawer>
+
+      {/* Right Wishlist Drawer */}
+      <Drawer anchor="right" open={wishlistDrawerOpen} onClose={handleWishlistToggle}>
+        <Box width={300} role="presentation" p={2}>
+          <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+            <Typography fontWeight="bold">Your Wishlist</Typography>
+            <IconButton onClick={handleWishlistToggle}>✕</IconButton>
+          </Box>
+
+          <Divider />
+
+         {wishlist.length === 0 ? (
+  <Typography mt={2}>No items in wishlist.</Typography>
+) : (
+  <List>
+    {wishlist.map((item) => (
+      <ListItem
+        key={item.id}
+        button
+        onClick={() => navigate(`/shirt/${item.id}`,{ state: { shirt: item } })} // 👈 Route to product
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: 2,
+          alignItems: 'center',
+          borderBottom: '1px solid #eee',
+          py: 1.5,
+        }}
+      >
+        <img
+          src={item.img}
+          alt={item.name}
+          style={{ width: 60, height: 80, objectFit: 'cover', borderRadius: 6 }}
+        />
+        <Box>
+          <Typography variant="caption" color="text.secondary">
+            {item.material}
+          </Typography>
+          <Typography variant="body2" fontWeight="500">
+            {item.name}
+          </Typography>
+          <Typography variant="subtitle2">₹ {item.price}</Typography>
+        </Box>
+      </ListItem>
+    ))}
+  </List>
+)}
         </Box>
       </Drawer>
       <SignInModal open={popupOpen} handleClose={()=>setpopupOpen(false)}/>
