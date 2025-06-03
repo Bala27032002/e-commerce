@@ -1,6 +1,7 @@
-import React from 'react';
+import React , {useContext} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import { WishlistContext } from '../context/WishlistContext';
 
 function LabelCarousel() {
   const slides = [
@@ -8,7 +9,8 @@ function LabelCarousel() {
     { text: 'WORLDWIDE SHIPPING AVAILABLE', bg: '#294a70',color:'white' },
     { text: 'TRENDING', bg: '#ccccff',color:'black' },
   ];
-
+  const { wishlist } = useContext(WishlistContext);
+  console.log("count",wishlist.length)
   return (
     <div style={{ height: '2rem', overflow: 'hidden' }}>
       <Carousel

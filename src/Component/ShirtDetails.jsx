@@ -5,8 +5,8 @@ import { Box, Typography, Button } from '@mui/material';
 const loadRazorpay = (src) => {
   return new Promise((resolve) => {
     const script = document.createElement("script");
-    script.src = src;
-    script.onload = () => resolve(true);
+    script.src = src; //assign to the url form script useing argument
+    script.onload = () => resolve(true); 
     script.onerror = () => resolve(false);
     document.body.appendChild(script);
   });

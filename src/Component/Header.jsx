@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext } from 'react';
 import {
   Box,
   Drawer,
@@ -15,11 +15,15 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import SignInModal from './SignInModal';
 import CustomBreadcrumbs from '../constant/CustomBreadcrumbs';
+import { WishlistContext } from '../context/WishlistContext';
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState('HOME'); 
   const [popupOpen , setpopupOpen] = useState(false)
+
+
+  const { wishlist } = useContext(WishlistContext);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
@@ -88,9 +92,29 @@ setpopupOpen(true);
           <IconButton>
             <PersonOutlineIcon />
           </IconButton>
-          <IconButton>
-            <WorkOutlineIcon />
-          </IconButton>
+         <IconButton>
+  <WorkOutlineIcon />
+  {wishlist.length > 0 && (
+    <Box
+      sx={{
+        position: 'absolute',
+        top: 5,
+        right: 5,
+        backgroundColor: 'red',
+        borderRadius: '50%',
+        width: 16,
+        height: 16,
+        color: 'white',
+        fontSize: '10px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      {wishlist.length}
+    </Box>
+  )}
+</IconButton>
         </Box>
       </Box>
  <CustomBreadcrumbs />
